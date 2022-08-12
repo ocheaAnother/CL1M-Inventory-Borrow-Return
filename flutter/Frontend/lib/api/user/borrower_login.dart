@@ -4,7 +4,7 @@ import 'package:Login/env/variables.dart';
 import 'package:Login/storage/secureStorage.dart';
 
 //Basically for logging in and getting a jwt in return You can use Username instead of email
-Future<bool> LoginUser(String Email, String Password) async {
+Future<bool> borrowerLogin(String username, String Password) async {
   //Headers
   Map<String, String> headers = {
     'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ Future<bool> LoginUser(String Email, String Password) async {
   Response response = await post(Uri.parse(api + "api/auth/local"),
       headers: headers,
       body: jsonEncode({
-        'identifier': Email,
+        'identifier': username,
         'password': Password,
       }));
 

@@ -43,8 +43,10 @@ class _ReturnState extends State<Return> {
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const Dashboard()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BorrowerPage()));
             }),
       ),
       body: ListView.builder(

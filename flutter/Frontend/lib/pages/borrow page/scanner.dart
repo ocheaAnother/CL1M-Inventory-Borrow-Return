@@ -13,20 +13,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scan(),
+      home: ScanItem(),
     );
   }
 }
 
-class Scan extends StatefulWidget {
-  const Scan({Key? key, this.title}) : super(key: key);
+class ScanItem extends StatefulWidget {
+  const ScanItem({Key? key, this.title}) : super(key: key);
   final String? title;
   @override
   // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<Scan> {
+class _MyHomePageState extends State<ScanItem> {
   String? _qrInfo = 'Scan a QR code';
   bool _camState = false;
   String date = "";
@@ -107,7 +107,7 @@ class _MyHomePageState extends State<Scan> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const Dashboard(),
+                              builder: (context) => const BorrowerPage(),
                             ),
                           );
                         },

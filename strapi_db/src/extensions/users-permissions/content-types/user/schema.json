@@ -65,6 +65,12 @@
     },
     "user_type": {
       "type": "string"
+    },
+    "personnel_id": {
+      "type": "string"
+    },
+    "student_id": {
+      "type": "string"
     }
   }
 }

@@ -120,7 +120,7 @@ class _MyHomePageState extends State<Borrow> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const Scan(),
+                  builder: (context) => ScanItem(),
                 ),
               );
             },

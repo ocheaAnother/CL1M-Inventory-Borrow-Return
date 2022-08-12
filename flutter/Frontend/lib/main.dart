@@ -1,4 +1,6 @@
-import 'package:Login/pages/auth/login.dart';
+import 'package:Login/pages/auth/admin_login.dart';
+import 'package:Login/pages/borrower_page.dart';
+import 'package:Login/pages/landing_page.dart';
 import "package:flutter/material.dart";
 import 'package:Login/functions/user/authenticate.dart';
 import 'package:Login/pages/auth/signup.dart';
@@ -20,15 +22,18 @@ class MyApp extends StatelessWidget {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) => MaterialApp(home: Home())),
+                builder: (BuildContext context) =>
+                    const MaterialApp(home: BorrowerPage())),
             (route) => false);
       } else {
         //Else If the user is not logged in we will route him to the Log-in Page.
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    MaterialApp(home: LoginPage())),
+              builder: (BuildContext context) => const MaterialApp(
+                home: HomePage(),
+              ),
+            ),
             (route) => false);
       }
     });

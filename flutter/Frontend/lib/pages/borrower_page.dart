@@ -1,5 +1,8 @@
+import 'package:Login/pages/auth/admin_login.dart';
 import 'package:Login/pages/borrow%20page/borrow.dart';
+import 'package:Login/pages/landing_page.dart';
 import 'package:Login/pages/return.dart';
+import 'package:Login/storage/secureStorage.dart';
 import 'package:flutter/material.dart';
 
 //import 'dashboard.dart';
@@ -7,12 +10,12 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Dashboard(),
+    home: BorrowerPage(),
   ));
 }
 
-class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
+class BorrowerPage extends StatelessWidget {
+  const BorrowerPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +167,7 @@ class Dashboard extends StatelessWidget {
                                 children: [
                                   Image.asset("assets/about.png", width: 64.0),
                                   const SizedBox(height: 10.0),
-                                  const Text("About",
+                                  const Text("Items",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -208,7 +211,7 @@ class Dashboard extends StatelessWidget {
                                 children: [
                                   Image.asset("assets/gear.png", width: 64.0),
                                   const SizedBox(height: 10.0),
-                                  const Text("Settings",
+                                  const Text("Borrowed Items",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -228,6 +231,25 @@ class Dashboard extends StatelessWidget {
                           ),
                         ),
                       ),
+                    ),
+                    ElevatedButton(
+                      child: Text("LogOut"),
+                      onPressed: () {
+                        storageAuth store = storageAuth();
+                        //Basically deleting the jwt and pushing the user to start page to revalidate
+                        //PushAndRemoveUntil Removes all the pages from Navigator and pushes a page to it
+                        store
+                            .logOutUser()
+                            .then((value) => Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const MaterialApp(
+                                    home: HomePage(),
+                                  ),
+                                ),
+                                (route) => false));
+                      },
                     ),
                   ],
                 ),
