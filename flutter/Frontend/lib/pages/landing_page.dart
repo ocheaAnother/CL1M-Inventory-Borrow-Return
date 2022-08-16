@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           end: Alignment.bottomCenter,
           colors: [
             Color(0xffff6700),
-            Color(0xffff7e00),
+            Color(0xffffdead),
           ],
         ),
       ),

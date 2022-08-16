@@ -28,6 +28,12 @@
     },
     "brand_serial_no": {
       "type": "string"
+    },
+    "borrowed_item": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::borrowed-item.borrowed-item",
+      "inversedBy": "items"
     }
   }
 }

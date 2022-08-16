@@ -71,6 +71,12 @@
     },
     "student_id": {
       "type": "string"
+    },
+    "borrowed_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::borrowed-item.borrowed-item",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

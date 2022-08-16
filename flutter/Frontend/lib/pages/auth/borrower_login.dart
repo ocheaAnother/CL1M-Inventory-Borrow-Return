@@ -24,137 +24,152 @@ class _BorrowerLoginPageState extends State<BorrowerLoginPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text("CL1M INVENTORY"),
-            backgroundColor: const Color(0xfffd5800),
-          ),
-          body: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  //gradient colors of orange
-                  Color(0xfffd5800),
-                  Color(0xccfd5800),
-                  Color(0x99fd5800),
-                  Color(0xB3fd5800),
-                ],
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("CL1M INVENTORY"),
+          backgroundColor: const Color(0xfffd5800),
+        ),
+        body: Container(
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  alignment: Alignment.center,
+                  image: const AssetImage("assets/ccis.png"),
+                  fit: BoxFit.fill,
+                  colorFilter: ColorFilter.mode(
+                      Colors.white.withOpacity(0.10), BlendMode.dstIn),
+                ),
               ),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(30),
-                  ),
-                  const Text(
-                    'Sign In',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 30),
-                  Form(
-                    key: _formkey,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          style: const TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                          decoration:
-                              const InputDecoration(labelText: 'ID Number'),
-                          validator: (value) {
-                            if (value != null && value.isEmpty) {
-                              return 'ID Number is required';
-                            }
-                          },
-                          onChanged: (value) {
-                            _username = value;
-                          },
-                        ),
-                        TextFormField(
-                          style: const TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                          decoration:
-                              const InputDecoration(labelText: "Password"),
-                          validator: (value) {
-                            if (value != null && value.isEmpty) {
-                              return 'Password is required';
-                            }
-                          },
-                          onChanged: (value) {
-                            _password = value;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        MaterialApp(
-                                      home: ScanId(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xfffd5800),
-                              ),
-                              child: const Text('Scan'),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                if (!_formkey.currentState!.validate()) {
-                                  return;
-                                }
-                                (_username);
-                                borrowerLogin('${_username}', '${_password}')
-                                    .then(
-                                  ((value) {
-                                    if (value) {
-                                      Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                const MaterialApp(
-                                              home: BorrowerPage(),
-                                            ),
-                                          ),
-                                          (route) => false);
-                                    }
-                                  }),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                primary: const Color(0xfffd5800),
-                              ),
-                              child: const Text("Log in"),
-                            ),
-                          ],
-                        ),
-                      ],
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(40),
                     ),
-                  ),
-                ],
+                    const Text(
+                      'Sign In',
+                      style:
+                          TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 30),
+                    Form(
+                      key: _formkey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 25),
+                            decoration:
+                                const InputDecoration(labelText: 'ID Number'),
+                            validator: (value) {
+                              if (value != null && value.isEmpty) {
+                                return 'ID Number is required';
+                              }
+                            },
+                            onChanged: (value) {
+                              _username = value;
+                            },
+                          ),
+                          TextFormField(
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 25),
+                            decoration:
+                                const InputDecoration(labelText: "Password"),
+                            validator: (value) {
+                              if (value != null && value.isEmpty) {
+                                return 'Password is required';
+                              }
+                            },
+                            onChanged: (value) {
+                              _password = value;
+                            },
+                          ),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          MaterialApp(
+                                        home: ScanId(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: const Color(0xfffd5800),
+                                ),
+                                child: const Text(
+                                  'Scan',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  if (!_formkey.currentState!.validate()) {
+                                    return;
+                                  }
+                                  (_username);
+                                  borrowerLogin('${_username}', '${_password}')
+                                      .then(
+                                    ((value) {
+                                      if (value) {
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  const MaterialApp(
+                                                home: BorrowerPage(),
+                                              ),
+                                            ),
+                                            (route) => false);
+                                      }
+                                    }),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: const Color(0xfffd5800),
+                                ),
+                                child: const Text(
+                                  'Log in',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

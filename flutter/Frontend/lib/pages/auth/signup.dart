@@ -1,7 +1,6 @@
-import 'package:Login/pages/borrower_page.dart';
+import 'package:Login/pages/admin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:Login/api/user/register.dart';
-import 'package:Login/main.dart';
 import 'package:Login/pages/auth/admin_login.dart';
 
 //Basically the Login Page Contains a form That is not the best form since main focus was on Logic
@@ -25,162 +24,191 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              //gradient colors of orange
-              Color(0xfffd5800),
-              Color(0xccfd5800),
-              Color(0x99fd5800),
-              Color(0xB3fd5800),
-            ],
-          ),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(30),
+        child: SingleChildScrollView(
+          //for the page to be scrolled
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                alignment: Alignment.center,
+                image: const AssetImage("assets/ccis.png"),
+                fit: BoxFit.fill,
+                colorFilter: ColorFilter.mode(
+                    Colors.white.withOpacity(0.10), BlendMode.dstIn),
               ),
-              const Text(
-                'Sign Up',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 30),
-              Form(
-                key: _formkey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                      decoration: const InputDecoration(labelText: "Email"),
-                      validator: (value) {
-                        if (value != null && value.isEmpty) {
-                          return 'Email is required';
-                        }
-                      },
-                      onChanged: (value) {
-                        _email = value;
-                      },
-                    ),
-                    TextFormField(
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                      decoration: const InputDecoration(labelText: "Username"),
-                      validator: (value) {
-                        if (value != null && value.isEmpty) {
-                          return 'Username is required';
-                        }
-                      },
-                      onChanged: (value) {
-                        _username = value;
-                      },
-                    ),
-                    TextFormField(
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                      decoration: const InputDecoration(
-                          labelText: "Usertype: admin, student, personel"),
-                      validator: (value) {
-                        if (value != null && value.isEmpty) {
-                          return 'Usertype is required';
-                        }
-                      },
-                      onChanged: (value) {
-                        _usertype = value;
-                      },
-                    ),
-                    TextFormField(
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                      decoration: const InputDecoration(labelText: "Password"),
-                      validator: (value) {
-                        if (value != null && value.isEmpty) {
-                          return 'Password is required';
-                        }
-                      },
-                      onChanged: (value) {
-                        _password = value;
-                      },
-                    ),
-                    TextFormField(
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                      decoration:
-                          const InputDecoration(labelText: "Confirm Password"),
-                      validator: (value) {
-                        if (value != null && value.isEmpty) {
-                          return 'Confirm Password is required';
-                        }
-                        if (value != _password) {
-                          return 'Password not same';
-                        }
-                      },
-                      onChanged: (value) {
-                        _confirmPassword = value;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      verticalDirection: VerticalDirection.down,
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(30),
+                  ),
+                  const Text(
+                    'Sign Up',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 30),
+                  Form(
+                    key: _formkey,
+                    child: Column(
                       children: [
-                        ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          MaterialApp(
-                                            home: AdminLoginPage(),
-                                          )));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color(0xfffd5800),
-                            ),
-                            child: const Text("Login page")),
-                        const SizedBox(
-                          width: 20,
+                        TextFormField(
+                          style: const TextStyle(
+                              color: Colors.black,
+                              // fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                          decoration: const InputDecoration(
+                              labelText: 'Email', hoverColor: Colors.white),
+                          validator: (value) {
+                            if (value != null && value.isEmpty) {
+                              return 'Email is required';
+                            }
+                          },
+                          onChanged: (value) {
+                            _email = value;
+                          },
                         ),
-                        ElevatedButton(
-                            onPressed: () {
-                              if (!_formkey.currentState!.validate()) {
-                                return;
-                              }
-                              print(_username);
-                              RegisterUser('${_username}', '${_email}',
-                                      '${_password}', '${_usertype}')
-                                  .then(((value) {
-                                if (value) {
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              const MaterialApp(
-                                                  home: BorrowerPage())),
-                                      (route) => false);
-                                }
-                              }));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color(0xfffd5800),
+                        TextFormField(
+                          style: const TextStyle(
+                              color: Colors.black,
+                              // fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                          decoration:
+                              const InputDecoration(labelText: "Username"),
+                          validator: (value) {
+                            if (value != null && value.isEmpty) {
+                              return 'Username is required';
+                            }
+                          },
+                          onChanged: (value) {
+                            _username = value;
+                          },
+                        ),
+                        TextFormField(
+                          style: const TextStyle(color: Colors.black),
+                          decoration: const InputDecoration(
+                              labelText: "Usertype: admin, student, personnel"),
+                          validator: (value) {
+                            if (value != null && value.isEmpty) {
+                              return 'Usertype is required';
+                            }
+                          },
+                          onChanged: (value) {
+                            _usertype = value;
+                          },
+                        ),
+                        TextFormField(
+                          style: const TextStyle(
+                              color: Colors.black,
+                              // fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                          decoration:
+                              const InputDecoration(labelText: "Password"),
+                          validator: (value) {
+                            if (value != null && value.isEmpty) {
+                              return 'Password is required';
+                            }
+                          },
+                          onChanged: (value) {
+                            _password = value;
+                          },
+                        ),
+                        TextFormField(
+                          style: const TextStyle(
+                              color: Colors.black,
+                              // fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                          decoration: const InputDecoration(
+                              labelText: "Confirm Password"),
+                          validator: (value) {
+                            if (value != null && value.isEmpty) {
+                              return 'Confirm Password is required';
+                            }
+                            if (value != _password) {
+                              return 'Password not same';
+                            }
+                          },
+                          onChanged: (value) {
+                            _confirmPassword = value;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            MaterialApp(
+                                              home: AdminLoginPage(),
+                                            )));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color(0xffffdead),
+                              ),
+                              child: const Text(
+                                'Login page',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
                             ),
-                            child: const Text("Sign Up")),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (!_formkey.currentState!.validate()) {
+                                  return;
+                                }
+                                print(_username);
+                                RegisterUser('${_username}', '${_email}',
+                                        '${_password}', '${_usertype}')
+                                    .then(
+                                  ((value) {
+                                    if (value) {
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                const MaterialApp(
+                                              home: AdminPage(),
+                                            ),
+                                          ),
+                                          (route) => false);
+                                    }
+                                  }),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color(0xffffdead),
+                              ),
+                              child: const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

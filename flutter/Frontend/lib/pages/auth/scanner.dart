@@ -65,7 +65,7 @@ class _ScanIdState extends State<ScanId> {
                 children: [
                   Text(
                     _qrInfo!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 30,
                     ),
                   ),

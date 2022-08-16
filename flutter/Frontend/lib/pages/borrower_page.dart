@@ -1,5 +1,6 @@
 import 'package:Login/pages/auth/admin_login.dart';
 import 'package:Login/pages/borrow%20page/borrow.dart';
+import 'package:Login/pages/borrow%20page/borrow_form.dart';
 import 'package:Login/pages/landing_page.dart';
 import 'package:Login/pages/return.dart';
 import 'package:Login/storage/secureStorage.dart';
@@ -23,7 +24,7 @@ class BorrowerPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('CL1M Inventory'),
       ),
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Color(0xffffdead),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +44,7 @@ class BorrowerPage extends StatelessWidget {
               child: Text(
                 "Dashboard",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Color.fromARGB(225, 21, 21, 21),
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.start,
@@ -153,7 +154,7 @@ class BorrowerPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Return()));
+                                  builder: (context) => const BorrowForm()));
                         },
                         child: Card(
                           color: const Color.fromARGB(225, 21, 21, 21),
@@ -167,51 +168,7 @@ class BorrowerPage extends StatelessWidget {
                                 children: [
                                   Image.asset("assets/about.png", width: 64.0),
                                   const SizedBox(height: 10.0),
-                                  const Text("Items",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0,
-                                      )),
-                                  // const SizedBox(height: 5.0),
-                                  //  const Text(
-                                  //    "Item/s",
-                                  //    style: TextStyle(
-                                  //     color: Colors.white,
-                                  //     fontWeight: FontWeight.w300,
-                                  //   ),
-                                  // ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 150.0,
-                      height: 150.0,
-                      child: InkWell(
-                        onTap: () {
-                          //BUTTON ACTION
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Return()));
-                        },
-                        child: Card(
-                          color: const Color.fromARGB(225, 21, 21, 21),
-                          elevation: 2.0,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                children: [
-                                  Image.asset("assets/gear.png", width: 64.0),
-                                  const SizedBox(height: 10.0),
-                                  const Text("Borrowed Items",
+                                  const Text("borrow",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
