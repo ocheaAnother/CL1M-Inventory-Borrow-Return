@@ -38,6 +38,7 @@ dependencies:
   # font_awesome_flutter: ^8.0.1
   # flutter_secure_storage: ^3.3.3
   http: any
+  flutter_bloc: ^8.1.1
   # flutter_translate: ^1.6.0
 
 dev_dependencies:

@@ -21,8 +21,6 @@ class Borrow {
       dateReturn: json['date_return'],
     );
   }
-
-  void add(Borrow borrow) {}
 }
 
 class Sample {

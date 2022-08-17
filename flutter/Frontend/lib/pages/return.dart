@@ -40,14 +40,14 @@ class _ReturnState extends State<Return> {
         backgroundColor: Colors.orange.shade700,
         title: Text('List of borrowed items'),
         //arrowback icon to return to the dashboard
-        leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const BorrowerPage()));
-            }),
+        // leading: IconButton(
+        //     icon: Icon(Icons.arrow_back),
+        //     onPressed: () {
+        //       Navigator.push(
+        //           context,
+        //           MaterialPageRoute(
+        //               builder: (context) => const BorrowerPage()));
+        //     }),
       ),
       body: ListView.builder(
         itemCount: data.length,

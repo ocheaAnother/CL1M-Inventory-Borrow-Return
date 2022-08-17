@@ -22,6 +22,8 @@ class Borrow extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
+
+  static fromJson(e) {}
 }
 
 class _MyHomePageState extends State<Borrow> {
@@ -38,7 +40,7 @@ class _MyHomePageState extends State<Borrow> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Borrow Page'),
-        backgroundColor: const Color(0xffffa500),
+        backgroundColor: const Color.fromARGB(225, 21, 21, 21),
       ),
       body: AlertDialog(
         shape: const RoundedRectangleBorder(
@@ -103,7 +105,7 @@ class _MyHomePageState extends State<Borrow> {
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xffffa500),
+              backgroundColor: const Color(0xffe9692c),
             ),
             onPressed: () => Navigator.pop(context),
             child: const Text(
@@ -113,7 +115,7 @@ class _MyHomePageState extends State<Borrow> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xffffa500),
+              backgroundColor: const Color(0xffe9692c),
             ),
             onPressed: () {
               agree ? _doSomething : null;

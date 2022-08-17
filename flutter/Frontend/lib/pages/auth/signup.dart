@@ -1,7 +1,7 @@
-import 'package:Login/pages/admin_page.dart';
-import 'package:flutter/material.dart';
 import 'package:Login/api/user/register.dart';
+import 'package:Login/pages/admin_page.dart';
 import 'package:Login/pages/auth/admin_login.dart';
+import 'package:flutter/material.dart';
 
 //Basically the Login Page Contains a form That is not the best form since main focus was on Logic
 //Yes I copied the above comment from Login 😊
@@ -19,6 +19,16 @@ class _SignupState extends State<Signup> {
 
   //These Variables Store Form Data
   String? _username, _email, _password, _confirmPassword, _usertype;
+// Initial Selected Value
+  String dropdownvalue = 'Choose User Type';
+
+// List of items in our dropdown menu
+  var items = [
+    'Choose User Type',
+    'Admin',
+    'Student',
+    'Personnel',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +50,6 @@ class _SignupState extends State<Signup> {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Padding(
                     padding: EdgeInsets.all(30),
@@ -56,12 +64,11 @@ class _SignupState extends State<Signup> {
                     child: Column(
                       children: [
                         TextFormField(
-                          style: const TextStyle(
-                              color: Colors.black,
-                              // fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                           decoration: const InputDecoration(
-                              labelText: 'Email', hoverColor: Colors.white),
+                            labelText: 'Email',
+                            labelStyle: TextStyle(),
+                          ),
                           validator: (value) {
                             if (value != null && value.isEmpty) {
                               return 'Email is required';
@@ -72,10 +79,7 @@ class _SignupState extends State<Signup> {
                           },
                         ),
                         TextFormField(
-                          style: const TextStyle(
-                              color: Colors.black,
-                              // fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                           decoration:
                               const InputDecoration(labelText: "Username"),
                           validator: (value) {
@@ -88,23 +92,7 @@ class _SignupState extends State<Signup> {
                           },
                         ),
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                              labelText: "Usertype: admin, student, personnel"),
-                          validator: (value) {
-                            if (value != null && value.isEmpty) {
-                              return 'Usertype is required';
-                            }
-                          },
-                          onChanged: (value) {
-                            _usertype = value;
-                          },
-                        ),
-                        TextFormField(
-                          style: const TextStyle(
-                              color: Colors.black,
-                              // fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                           decoration:
                               const InputDecoration(labelText: "Password"),
                           validator: (value) {
@@ -117,10 +105,7 @@ class _SignupState extends State<Signup> {
                           },
                         ),
                         TextFormField(
-                          style: const TextStyle(
-                              color: Colors.black,
-                              // fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                           decoration: const InputDecoration(
                               labelText: "Confirm Password"),
                           validator: (value) {
@@ -136,8 +121,36 @@ class _SignupState extends State<Signup> {
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            DropdownButton(
+                              // Initial Value
+                              value: dropdownvalue,
+
+                              // Down Arrow Icon
+                              icon: const Icon(Icons.keyboard_arrow_down),
+
+                              // Array list of items
+                              items: items.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items),
+                                );
+                              }).toList(),
+                              // After selecting the desired option,it will
+                              // change button value to selected value
+                              onChanged: (String? _usertype) {
+                                setState(() {
+                                  dropdownvalue = _usertype!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,12 +158,14 @@ class _SignupState extends State<Signup> {
                             ElevatedButton(
                               onPressed: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            MaterialApp(
-                                              home: AdminLoginPage(),
-                                            )));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        MaterialApp(
+                                      home: AdminLoginPage(),
+                                    ),
+                                  ),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: const Color(0xffffdead),
